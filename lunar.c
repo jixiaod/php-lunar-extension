@@ -157,17 +157,16 @@ void calc(int year, int month, int day)
             "廿一","廿二","廿三","廿四","廿五","廿六","廿七","廿八","廿九","三十"
     };
 
-    //char lunar_output[100]={0};
-    char *lunar_output;
-    sprintf(*lunar_output, "%s%s年 %s%s月%s", tiangan[year_cyl%10], dizhi[year_cyl%12], is_leap==1?"润":"", lunar_month_names[global_month], lunar_day_names[global_day]);
+    char lunar_output[100]={0};
+    sprintf(lunar_output, "%s%s年 %s%s月%s", tiangan[year_cyl%10], dizhi[year_cyl%12], is_leap==1?"润":"", lunar_month_names[global_month], lunar_day_names[global_day]);
     //c_day(global_day);
     //printf("%d", global_day);
-    printf("%s", *lunar_output);
+    printf("%s", lunar_output);
 }
 
 int main()
 {
-    calc(2050, 10, 25);
+    calc(2016, 2, 29);
     //display();
 }
 
