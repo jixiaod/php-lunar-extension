@@ -27,6 +27,8 @@
 #include "ext/standard/info.h"
 #include "php_datetolunar.h"
 
+#include "lib/timelib.h"
+
 /* If you declare any globals in php_datetolunar.h uncomment this:
 ZEND_DECLARE_MODULE_GLOBALS(datetolunar)
 */
@@ -134,14 +136,16 @@ int month_days(int year, int month)
    ; */
 PHP_FUNCTION(datetolunar)
 {
-	int argc = ZEND_NUM_ARGS();
-	long year;
-	long month;
-	long day;
+	char				*date;
+	int					date_len;
+	timelib_time        *parsed_time;
+	struct timelib_error_container *error;
 
-	if (zend_parse_parameters(argc TSRMLS_CC, "lll", &year, &month, &day) == FAILURE) 
-		return;
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &date, &date_len) == FAILURE) {
+		RETURN_FALSE;	
+	}
     
+
     int offset = 0;
     int temp = 0;
     int leap = 0;

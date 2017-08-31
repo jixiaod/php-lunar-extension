@@ -41,7 +41,11 @@ if test "$PHP_DATETOLUNAR" != "no"; then
   dnl fi
 
   dnl # --with-datetolunar -> add include path
-  dnl PHP_ADD_INCLUDE($DATETOLUNAR_DIR/include)
+  PHP_DATE_CFLAGS="-I@ext_builddir@/lib -D HAVE_TIMELIB_CONFIG_H=1"
+  timelib_sources="lib/parse_date.c lib/timelib.c"
+  PHP_NEW_EXTENSION(datetolunar, php_datetolunar.c $timelib_sources, no,, $PHP_DATE_CFLAGS)
+
+  PHP_ADD_INCLUDE($DATETOLUNAR_DIR/lib)
 
   dnl # --with-datetolunar -> check for lib and symbol presence
   dnl LIBNAME=datetolunar # you may want to change this
